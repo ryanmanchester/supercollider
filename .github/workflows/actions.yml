@@ -233,7 +233,8 @@ jobs:
       USE_SYSLIBS: ${{ matrix.use-syslibs }}
       SHARED_LIBSCSYNTH: ${{ matrix.shared-libscsynth }}
       DEVELOPER_DIR: '/Applications/Xcode_${{ matrix.xcode-version }}.app/Contents/Developer'
-      ARTIFACT_FILE: 'SuperCollider-${{ needs.linter.outputs.sc-version }}-${{ matrix.artifact-suffix }}.zip'
+      ARTIFACT_FILE: 'SuperCollider-${{ needs.linter.outputs.sc-version }}-${{ matrix.artifact-suffix }}.dmg'
+      DISK_IMAGE_NAME: 'SuperCollider ${{ needs.linter.outputs.sc-version }} ${{ matrix.job-name }}' # omitting dashes and "macOS"
     steps:
       - uses: actions/checkout@v2
         with:
@@ -306,7 +307,7 @@ jobs:
         run: cmake --build $BUILD_PATH --config Release --target install
       - name: create archive
         if: matrix.artifact-suffix
-        run: cd $INSTALL_PATH && zip --symlinks -r $ARTIFACT_FILE SuperCollider # this assumes that we end up with the build in the folder SuperCollider
+        run: cd $INSTALL_PATH && hdiutil create -volname "$DISK_IMAGE_NAME" -srcfolder SuperCollider -ov -format UDBZ $ARTIFACT_FILE # this assumes that we end up with the build in the folder SuperCollider
       - name: upload artifacts
         uses: actions/upload-artifact@v2
         if: matrix.artifact-suffix
