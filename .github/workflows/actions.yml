@@ -409,7 +409,7 @@ jobs:
           ASIO_PATH: ${{ env.LIBS_DOWNLOAD_PATH }}/asio_sdk
         run: |
           mkdir -p $ASIO_PATH && cd $ASIO_PATH
-          curl %ASIO_URL% -o asio.zip
+          curl $ASIO_URL -o asio.zip
           7z x asio.zip -y
           mv $ASIO_FOLDER_NAME $GITHUB_WORKSPACE/external_libraries/portaudio/asiosdk
           echo "Done installing asio sdk"
