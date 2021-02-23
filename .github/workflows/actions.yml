@@ -373,7 +373,9 @@ jobs:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
       - name: run vcvars script
         if: ${{ env.VCVARS_SCRIPT }}
-        run: "%MSVC_PATH%/VC/Auxiliary/Build/%VCVARS_SCRIPT%"
+        env:
+          VCVARS_SCRIPT_PATH: ${{ env.MSVC_PATH }}/VC/Auxiliary/Build/${{ env.VCVARS_SCRIPT }}
+        run: $env:VCVARS_SCRIPT_PATH
       - name: install libsndfile
         run: choco install libsndfile
       - name: install fftw
@@ -387,17 +389,17 @@ jobs:
           7z x fftw.zip -y
           lib.exe /machine:$FFTW_ARCH /def:libfftw3f-3.def
           cd ..
-          mv fftw "C:\$PROGFILES\fftw"
+          mv fftw "C:/$PROGFILES/fftw"
           echo "Done installing fftw"
       - name: install asio sdk
         shell: bash
         env:
-          ASIO_PATH: ${{ env.LIBS_DOWNLOAD_PATH }}\asio_sdk
+          ASIO_PATH: ${{ env.LIBS_DOWNLOAD_PATH }}/asio_sdk
         run: |
           mkdir $env:ASIO_PATH && cd $env:ASIO_PATH
           curl %ASIO_URL% -o asio.zip
           7z x asio.zip -y
-          mv $ASIO_FOLDER_NAME $GITHUB_WORKSPACE\external_libraries\portaudio\asiosdk
+          mv $ASIO_FOLDER_NAME $GITHUB_WORKSPACE/external_libraries/portaudio/asiosdk
           echo "Done installing asio_sdk"
       - name: configure
         env:
