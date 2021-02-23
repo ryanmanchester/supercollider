@@ -371,10 +371,10 @@ jobs:
           version: ${{ matrix.qt-version }}
           arch: ${{ matrix.qt-arch }}
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
-      - name: run vcvars script
-        if: ${{ env.VCVARS_SCRIPT }}
-        shell: cmd
-        run: call %VCVARS_SCRIPT_PATH%
+      # - name: run vcvars script
+      #   if: ${{ env.VCVARS_SCRIPT }}
+      #   shell: cmd
+      #   run: call %VCVARS_SCRIPT_PATH%
       - name: install libsndfile
         run: choco install libsndfile
       - name: download fftw
@@ -395,7 +395,7 @@ jobs:
         env:
           FFTW_ARCH: ${{ matrix.fftw-arch }}
         run: |
-          call %VCVARS_SCRIPT_PATH%
+          call "%VCVARS_SCRIPT_PATH%"
           cd %FFTW_PATH%
           lib.exe /machine:$FFTW_ARCH /def:libfftw3f-3.def
       - name: move fftw
@@ -422,7 +422,7 @@ jobs:
         run: |
           set PATH=%Qt5_DIR%\bin;%PATH%
 
-          if [[ -z "$VCVARS_SCRIPT" ]]; then $VCVARS_SCRIPT_PATH; fi
+          if [[ -z "$VCVARS_SCRIPT" ]]; then "$VCVARS_SCRIPT_PATH"; fi
 
           mkdir $BUILD_PATH && cd $BUILD_PATH
 
