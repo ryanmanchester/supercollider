@@ -423,8 +423,6 @@ jobs:
         run: |
           set PATH=%Qt5_DIR%\bin;%PATH%
 
-          call "$VCVARS_SCRIPT_PATH" # should be done for MSVC builds only...
-
           mkdir $BUILD_PATH && cd $BUILD_PATH
 
           cmake -G "%CMAKE_GENERATOR%" -A "%CMAKE_ARCH%" -D CMAKE_PREFIX_PATH=%Qt5_DIR% -D SUPERNOVA=ON -D SC_USE_QTWEBENGINE="%USE_WEBENGINE%" -D ABLETON_LINK="%ABLETON_LINK%" ..
