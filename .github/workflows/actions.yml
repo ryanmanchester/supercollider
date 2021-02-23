@@ -391,13 +391,13 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
       - name: create fftw msvc library
         if: ${{ env.VCVARS_SCRIPT }} # only for MSVC
-        shell: bash
+        shell: cmd
         env:
           FFTW_ARCH: ${{ matrix.fftw-arch }}
         run: |
-          "$VCVARS_SCRIPT_PATH"
-          cd "$FFTW_PATH"
-          lib.exe /machine:$FFTW_ARCH /def:libfftw3f-3.def
+          call "%VCVARS_SCRIPT_PATH%"
+          cd "%FFTW_PATH%"
+          lib.exe /machine:%FFTW_ARCH% /def:libfftw3f-3.def
       - name: move fftw
         shell: bash
         run: |
@@ -422,7 +422,7 @@ jobs:
         run: |
           set PATH=%Qt5_DIR%\bin;%PATH%
 
-          if [[ -z "$VCVARS_SCRIPT" ]]; then "$VCVARS_SCRIPT_PATH"; fi
+          call "$VCVARS_SCRIPT_PATH" # should be done for MSVC builds only...
 
           mkdir $BUILD_PATH && cd $BUILD_PATH
 
