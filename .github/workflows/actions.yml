@@ -322,16 +322,16 @@ jobs:
         include:
 
           - job-name: '64-bit'
-            os-version: '2019'
+            os-version: '2016'
             qt-version: '5.15.2'
-            qt-arch: 'win64_msvc2019_64'
+            qt-arch: 'win64_msvc2017_64'
             fftw_url: 'ftp://ftp.fftw.org/pub/fftw/fftw-3.3.5-dll64.zip'
             # progfiles: 'Program Files' # 'Program Files' or 'Program Files (x86)'
-            cmake-generator: 'Visual Studio 16 2019'
-            msvc-version: '2019'
+            cmake-generator: 'Visual Studio 15 2017'
+            msvc-version: '2017'
             vcvars_script: 'vcvars64.bat'
             fftw-arch: 'X64'
-            cmake-arch: 'x64'
+            cmake-arch: 'Win64'
             chocolatey-options: '' # '--forcex86' for 32-bit build
             use-qtwebengine: 'ON' # might need to be turned off for MinGW
             ableton-link: 'ON' # might need to be turned off for MinGW
@@ -423,10 +423,8 @@ jobs:
           export PATH=$Qt5_DIR/bin:$PATH
 
           mkdir $BUILD_PATH && cd $BUILD_PATH
-          
-          echo `pwd`
 
-          cmake -G "$CMAKE_GENERATOR" -A "$CMAKE_ARCH" -D CMAKE_PREFIX_PATH="$Qt5_DIR" -D SUPERNOVA=ON -D SC_USE_QTWEBENGINE=$USE_WEBENGINE -D ABLETON_LINK=$ABLETON_LINK ..
+          cmake -G "$CMAKE_GENERATOR" -A "$CMAKE_ARCH" -D CMAKE_PREFIX_PATH="$Qt5_DIR" -D SUPERNOVA=ON -D SC_USE_QTWEBENGINE=$USE_WEBENGINE -D SC_ABLETON_LINK=$ABLETON_LINK ..
 
       - name: build
         shell: bash
@@ -436,11 +434,10 @@ jobs:
       - name: create an installer
         # if: startsWith(github.ref, 'refs/tags/')
         if: true # trigger for now
-        shell: cmd
+        shell: bash
         run: |
-          set PATH="C:\Program Files (x86)\NSIS";%PATH%
-          cd %BUILD_PATH%
-          cmake --build . --config Release --target installer
+          export PATH="C:\Program Files (x86)\NSIS":$PATH
+          cmake --build $BUILD_PATH --config Release --target installer
       - name: create archive
         if: matrix.artifact-suffix
         shell: bash
