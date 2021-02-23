@@ -383,7 +383,7 @@ jobs:
           FFTW_PATH: ${{ env.LIBS_DOWNLOAD_PATH }}/fftw
         run: |
           mkdir -p $FFTW_PATH && cd $FFTW_PATH
-          curl ${{ matrix.fftw_url }} -o fftw.zip
+          curl -L ${{ matrix.fftw_url }} -o fftw.zip
           7z x fftw.zip -y
           # add env var for subsequent steps
           echo 'FFTW_PATH<<EOF' >> $GITHUB_ENV
@@ -409,7 +409,7 @@ jobs:
           ASIO_PATH: ${{ env.LIBS_DOWNLOAD_PATH }}/asio_sdk
         run: |
           mkdir -p $ASIO_PATH && cd $ASIO_PATH
-          curl $ASIO_URL -o asio.zip
+          curl -L $ASIO_URL -o asio.zip
           7z x asio.zip -y
           mv $ASIO_FOLDER_NAME $GITHUB_WORKSPACE/external_libraries/portaudio/asiosdk
           echo "Done installing asio sdk"
