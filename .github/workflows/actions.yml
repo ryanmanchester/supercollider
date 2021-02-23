@@ -420,7 +420,7 @@ jobs:
           ABLETON_LINK: ${{ matrix.ableton-link }}
         run: |
           # set PATH=%Qt5_DIR%\bin;%PATH%
-          export PATH=$Qt5_DIR\bin;$PATH
+          export PATH=$Qt5_DIR/bin;$PATH
 
           mkdir $BUILD_PATH && cd $BUILD_PATH
           
