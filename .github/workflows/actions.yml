@@ -412,33 +412,34 @@ jobs:
           mv $ASIO_FOLDER_NAME $GITHUB_WORKSPACE/external_libraries/portaudio/asiosdk
           echo "Done installing asio sdk"
       - name: configure
-        shell: cmd
+        shell: bash
         env:
           CMAKE_GENERATOR: ${{ matrix.cmake-generator }}
           CMAKE_ARCH: ${{ matrix.cmake-arch }}
           USE_WEBENGINE: ${{ matrix.use-qtwebengine }}
           ABLETON_LINK: ${{ matrix.ableton-link }}
         run: |
-          set PATH=%Qt5_DIR%\bin;%PATH%
+          # set PATH=%Qt5_DIR%\bin;%PATH%
+          export PATH=$Qt5_DIR\bin;$PATH
 
           mkdir $BUILD_PATH && cd $BUILD_PATH
           
-          echo %cd%
+          echo pwd
 
-          cmake -G "%CMAKE_GENERATOR%" -A "%CMAKE_ARCH%" -D CMAKE_PREFIX_PATH=%Qt5_DIR% -D SUPERNOVA=ON -D SC_USE_QTWEBENGINE="%USE_WEBENGINE%" -D ABLETON_LINK="%ABLETON_LINK%" ..
+          cmake -G $CMAKE_GENERATOR -A $CMAKE_ARCH -D CMAKE_PREFIX_PATH=$Qt5_DIR -D SUPERNOVA=ON -D SC_USE_QTWEBENGINE=$USE_WEBENGINE -D ABLETON_LINK=$ABLETON_LINK ..
 
       - name: build
-        shell: cmd
+        shell: bash
         run: |
-          cd $BUILD_PATH
-          cmake --build . --config Release --target install
+          # cd $BUILD_PATH
+          cmake --build $BUILD_PATH --config Release --target install
       - name: create an installer
         # if: startsWith(github.ref, 'refs/tags/')
         if: true # trigger for now
         shell: cmd
         run: |
           set PATH="C:\Program Files (x86)\NSIS";%PATH%
-          cd $BUILD_PATH
+          cd %BUILD_PATH%
           cmake --build . --config Release --target installer
       - name: create archive
         if: matrix.artifact-suffix
