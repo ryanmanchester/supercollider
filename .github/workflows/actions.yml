@@ -414,6 +414,7 @@ jobs:
           mv $ASIO_FOLDER_NAME $GITHUB_WORKSPACE/external_libraries/portaudio/asiosdk
           echo "Done installing asio sdk"
       - name: configure
+        shell: cmd
         env:
           CMAKE_GENERATOR: ${{ matrix.cmake-generator }}
           CMAKE_ARCH: ${{ matrix.cmake-arch }}
@@ -429,9 +430,11 @@ jobs:
           cmake -G "%CMAKE_GENERATOR%" -A "%CMAKE_ARCH%" -D CMAKE_PREFIX_PATH=%Qt5_DIR% -D SUPERNOVA=ON -D SC_USE_QTWEBENGINE="%USE_WEBENGINE%" -D ABLETON_LINK="%ABLETON_LINK%" ..
 
       - name: build
+        shell: cmd
         run: cmake --build $BUILD_PATH --config Release --target install
       - name: create archive
         if: matrix.artifact-suffix
+        shell: bash
         run: cd $INSTALL_PATH && zip --symlinks -r $ARTIFACT_FILE SuperCollider # this assumes that we end up with the build in the folder SuperCollider
       - name: upload artifacts
         uses: actions/upload-artifact@v2
