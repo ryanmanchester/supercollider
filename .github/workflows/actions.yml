@@ -426,10 +426,10 @@ jobs:
           cmake -G "%CMAKE_GENERATOR%" -A "%CMAKE_ARCH%" -D CMAKE_PREFIX_PATH="%Qt5_DIR%" -D SUPERNOVA=ON -D SC_USE_QTWEBENGINE=%USE_WEBENGINE% -D SC_ABLETON_LINK=%ABLETON_LINK% ..
 
       - name: build
-        shell: bash
+        shell: cmd
         run: |
           # cd $BUILD_PATH
-          cmake --build $BUILD_PATH --config Release --target install
+          cmake --build "%BUILD_PATH%" --config Release --target install
       - name: create an installer
         # if: startsWith(github.ref, 'refs/tags/')
         if: true # trigger for now
