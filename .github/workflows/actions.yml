@@ -400,10 +400,10 @@ jobs:
           cd %FFTW_PATH%
           lib.exe /machine:$FFTW_ARCH /def:libfftw3f-3.def
       - name: move fftw
-          shell: bash
-          run: |
-            mv $FFTW_PATH C:/$PROGFILES/fftw
-            echo "Done installing fftw"
+        shell: bash
+        run: |
+          mv $FFTW_PATH C:/$PROGFILES/fftw
+          echo "Done installing fftw"
       - name: install asio sdk
         shell: bash
         env:
