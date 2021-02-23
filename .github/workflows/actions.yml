@@ -330,7 +330,7 @@ jobs:
             cmake-generator: 'Visual Studio 16 2019'
             msvc-version: '2019'
             vcvars_script: 'vcvars64.bat'
-            fftw-arch: 'x64'
+            fftw-arch: 'X64'
             cmake-arch: 'x64'
             use-qtwebengine: 'ON' # might need to be turned off for MinGW
             ableton-link: 'ON' # might need to be turned off for MinGW
@@ -341,7 +341,7 @@ jobs:
       BUILD_PATH: ${{ github.workspace }}/build
       INSTALL_PATH: ${{ github.workspace }}/build/Install
       VCVARS_SCRIPT: ${{ matrix.vcvars_script }}
-      LIBS_DOWNLOAD_PATH: ${{ github.workspace }}/build/3rd-party
+      LIBS_DOWNLOAD_PATH: ${{ github.workspace }}/../3rd-party
       PROGFILES: ${{ matrix.progfiles }}
       ASIO_URL: 'http://www.steinberg.net/sdk_downloads/asiosdk2.3.zip'
       ASIO_FOLDER_NAME: ASIOSDK2.3
@@ -382,7 +382,7 @@ jobs:
         env:
           FFTW_PATH: ${{ env.LIBS_DOWNLOAD_PATH }}/fftw
         run: |
-          mkdir $FFTW_PATH && cd $FFTW_PATH
+          mkdir -p $FFTW_PATH && cd $FFTW_PATH
           curl ${{ matrix.fftw_url }} -o fftw.zip
           7z x fftw.zip -y
           # add env var for subsequent steps
@@ -401,14 +401,14 @@ jobs:
       - name: move fftw
         shell: bash
         run: |
-          mv $FFTW_PATH C:/$PROGFILES/fftw
+          mv $FFTW_PATH "C:/$PROGFILES/fftw"
           echo "Done installing fftw"
       - name: install asio sdk
         shell: bash
         env:
           ASIO_PATH: ${{ env.LIBS_DOWNLOAD_PATH }}/asio_sdk
         run: |
-          mkdir $env:ASIO_PATH && cd $env:ASIO_PATH
+          mkdir -p $env:ASIO_PATH && cd $env:ASIO_PATH
           curl %ASIO_URL% -o asio.zip
           7z x asio.zip -y
           mv $ASIO_FOLDER_NAME $GITHUB_WORKSPACE/external_libraries/portaudio/asiosdk
