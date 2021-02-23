@@ -422,19 +422,24 @@ jobs:
           set PATH=%Qt5_DIR%\bin;%PATH%
 
           mkdir $BUILD_PATH && cd $BUILD_PATH
+          
+          echo %cd%
 
           cmake -G "%CMAKE_GENERATOR%" -A "%CMAKE_ARCH%" -D CMAKE_PREFIX_PATH=%Qt5_DIR% -D SUPERNOVA=ON -D SC_USE_QTWEBENGINE="%USE_WEBENGINE%" -D ABLETON_LINK="%ABLETON_LINK%" ..
 
       - name: build
         shell: cmd
-        run: cmake --build %BUILD_PATH% --config Release --target install
+        run: |
+          cd $BUILD_PATH
+          cmake --build . --config Release --target install
       - name: create an installer
         # if: startsWith(github.ref, 'refs/tags/')
         if: true # trigger for now
         shell: cmd
         run: |
           set PATH="C:\Program Files (x86)\NSIS";%PATH%
-          cmake --build %BUILD_PATH% --config Release --target installer
+          cd $BUILD_PATH
+          cmake --build . --config Release --target installer
       - name: create archive
         if: matrix.artifact-suffix
         shell: bash
