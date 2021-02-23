@@ -373,7 +373,7 @@ jobs:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
       - name: run vcvars script
         if: ${{ env.VCVARS_SCRIPT }}
-        run: call "%MSVC_PATH%\VC\Auxiliary\Build\%VCVARS_SCRIPT%"
+        run: "%MSVC_PATH%\VC\Auxiliary\Build\%VCVARS_SCRIPT%"
       - name: install libsndfile
         run: choco install libsndfile
       - name: install fftw
