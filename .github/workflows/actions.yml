@@ -323,7 +323,7 @@ jobs:
 
           - job-name: '64-bit'
             os-version: '2016'
-            qt-version: '5.15.2'
+            qt-version: '5.14.2'
             qt-arch: 'win64_msvc2017_64'
             fftw_url: 'ftp://ftp.fftw.org/pub/fftw/fftw-3.3.5-dll64.zip'
             # progfiles: 'Program Files' # 'Program Files' or 'Program Files (x86)'
