@@ -391,12 +391,12 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
       - name: create fftw msvc library
         if: ${{ env.VCVARS_SCRIPT }} # only for MSVC
-        shell: cmd
+        shell: bash
         env:
           FFTW_ARCH: ${{ matrix.fftw-arch }}
         run: |
-          call "%VCVARS_SCRIPT_PATH%"
-          cd %FFTW_PATH%
+          "$VCVARS_SCRIPT_PATH"
+          cd "$FFTW_PATH"
           lib.exe /machine:$FFTW_ARCH /def:libfftw3f-3.def
       - name: move fftw
         shell: bash
@@ -408,11 +408,11 @@ jobs:
         env:
           ASIO_PATH: ${{ env.LIBS_DOWNLOAD_PATH }}/asio_sdk
         run: |
-          mkdir -p $env:ASIO_PATH && cd $env:ASIO_PATH
+          mkdir -p $ASIO_PATH && cd $ASIO_PATH
           curl %ASIO_URL% -o asio.zip
           7z x asio.zip -y
           mv $ASIO_FOLDER_NAME $GITHUB_WORKSPACE/external_libraries/portaudio/asiosdk
-          echo "Done installing asio_sdk"
+          echo "Done installing asio sdk"
       - name: configure
         env:
           CMAKE_GENERATOR: ${{ matrix.cmake-generator }}
