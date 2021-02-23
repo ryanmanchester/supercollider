@@ -324,12 +324,12 @@ jobs:
           - job-name: '64-bit'
             fftw-arch: 'x64'
             cmake-arch: 'x64'
-            os-version: '2016'
-            qt-version: '5.14.2'
-            qt-arch: 'win64_msvc2017_64'
+            os-version: '2019'
+            qt-version: '5.15.2'
+            qt-arch: 'win64_msvc2019_64'
             fftw_url: 'ftp://ftp.fftw.org/pub/fftw/fftw-3.3.5-dll64.zip'
-            cmake-generator: 'Visual Studio 15 2017'
-            msvc-version: '2017'
+            cmake-generator: 'Visual Studio 16 2019'
+            msvc-version: '2019'
             vcvars_script: 'vcvars64.bat'
             chocolatey-options: '' # '--forcex86' for 32-bit build
             use-qtwebengine: 'ON' # might need to be turned off for MinGW
@@ -409,25 +409,27 @@ jobs:
           7z x asio.zip -y
           mv $ASIO_FOLDER_NAME $GITHUB_WORKSPACE/external_libraries/portaudio/asiosdk
           echo "Done installing asio sdk"
+      - name: debug with tmate
+        uses: mxschmitt/action-tmate@v3
       - name: configure
-        shell: cmd
+        shell: bash
         env:
           CMAKE_GENERATOR: ${{ matrix.cmake-generator }}
           CMAKE_ARCH: ${{ matrix.cmake-arch }}
           USE_WEBENGINE: ${{ matrix.use-qtwebengine }}
           ABLETON_LINK: ${{ matrix.ableton-link }}
         run: |
-          set PATH=%Qt5_DIR%\bin;%PATH%
-          # export PATH=$Qt5_DIR/bin:$PATH
+          # set PATH=%Qt5_DIR%\bin;%PATH%
+          export PATH=$Qt5_DIR/bin:$PATH
           
           # cmd //c "%VCVARS_SCRIPT_PATH%"
-          call "%VCVARS_SCRIPT_PATH%"
+          # call "%VCVARS_SCRIPT_PATH%"
 
-          # mkdir $BUILD_PATH && cd $BUILD_PATH
-          mkdir %BUILD_PATH% && cd %BUILD_PATH%
+          mkdir $BUILD_PATH && cd $BUILD_PATH
+          # mkdir %BUILD_PATH% && cd %BUILD_PATH%
 
-          # cmake -G "$CMAKE_GENERATOR" -A "$CMAKE_ARCH" -D CMAKE_PREFIX_PATH="$Qt5_DIR" -D SUPERNOVA=ON -D SC_USE_QTWEBENGINE=$USE_WEBENGINE -D SC_ABLETON_LINK=$ABLETON_LINK ..
-          cmake -G "%CMAKE_GENERATOR%" -A "%CMAKE_ARCH%" -D CMAKE_PREFIX_PATH="%Qt5_DIR%" -D SUPERNOVA=ON -D SC_USE_QTWEBENGINE=%USE_WEBENGINE% -D SC_ABLETON_LINK=%ABLETON_LINK% ..
+          cmake -G "$CMAKE_GENERATOR" -A "$CMAKE_ARCH" -D CMAKE_PREFIX_PATH="$Qt5_DIR" -D SUPERNOVA=ON -D SC_USE_QTWEBENGINE=$USE_WEBENGINE -D SC_ABLETON_LINK=$ABLETON_LINK ..
+          # cmake -G "%CMAKE_GENERATOR%" -A "%CMAKE_ARCH%" -D CMAKE_PREFIX_PATH="%Qt5_DIR%" -D SUPERNOVA=ON -D SC_USE_QTWEBENGINE=%USE_WEBENGINE% -D SC_ABLETON_LINK=%ABLETON_LINK% ..
 
       - name: build
         shell: bash
