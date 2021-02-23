@@ -342,7 +342,7 @@ jobs:
       INSTALL_PATH: ${{ github.workspace }}/build/Install
       MSVC_PATH: 'C:/Program Files (x86)/Microsoft Visual Studio/${{ matrix.msvc-version }}/Enterprise'
       VCVARS_SCRIPT: ${{ matrix.vcvars_script }}
-      3RD_PARTY_PATH: ${{ github.workspace }}/build/3rd-party
+      LIBS_DOWNLOAD_PATH: ${{ github.workspace }}/build/3rd-party
       PROGFILES: ${{ matrix.progfiles }}
       ASIO_URL: 'http://www.steinberg.net/sdk_downloads/asiosdk2.3.zip'
       ASIO_FOLDER_NAME: ASIOSDK2.3
@@ -379,7 +379,7 @@ jobs:
       - name: install fftw
         shell: bash
         env:
-          FFTW_PATH: ${{ env.3RD_PARTY_PATH }}\fftw
+          FFTW_PATH: ${{ env.LIBS_DOWNLOAD_PATH }}\fftw
           FFTW_ARCH: ${{ matrix.fftw-arch }}
         run: |
           mkdir $env:FFTW_PATH && cd $env:FFTW_PATH
@@ -392,7 +392,7 @@ jobs:
       - name: install asio sdk
         shell: bash
         env:
-          ASIO_PATH: ${{ env.3RD_PARTY_PATH }}\asio_sdk
+          ASIO_PATH: ${{ env.LIBS_DOWNLOAD_PATH }}\asio_sdk
         run: |
           mkdir $env:ASIO_PATH && cd $env:ASIO_PATH
           curl %ASIO_URL% -o asio.zip
