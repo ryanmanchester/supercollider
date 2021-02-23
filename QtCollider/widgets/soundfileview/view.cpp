@@ -90,13 +90,9 @@ QcWaveform::~QcWaveform() {
         sf_close(sf);
 }
 
-void QcWaveform::load(const QString& filename) {
-    load(filename, 0, 0, true);
-}
+void QcWaveform::load(const QString& filename) { load(filename, 0, 0, true); }
 
-void QcWaveform::load(const QString& filename, int beg, int dur) {
-    load(filename, beg, dur, false);
-}
+void QcWaveform::load(const QString& filename, int beg, int dur) { load(filename, beg, dur, false); }
 
 static SNDFILE* sndfileOpenQString(const QString& filename, int mode, SF_INFO* info) {
 #ifdef _WIN32
@@ -125,7 +121,6 @@ void QcWaveform::load(const QString& filename, int beg, int dur, bool allFrames)
 
 
 void QcWaveform::load(const QVector<double>& data, int offset, int ch, int sr) {
-
     if (ch < 1) {
         return;
     }
