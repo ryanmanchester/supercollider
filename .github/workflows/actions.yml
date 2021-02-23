@@ -322,6 +322,8 @@ jobs:
         include:
 
           - job-name: '64-bit'
+            fftw-arch: 'x64'
+            cmake-arch: 'x64'
             os-version: '2016'
             qt-version: '5.14.2'
             qt-arch: 'win64_msvc2017_64'
@@ -329,8 +331,6 @@ jobs:
             cmake-generator: 'Visual Studio 15 2017'
             msvc-version: '2017'
             vcvars_script: 'vcvars64.bat'
-            fftw-arch: 'x64'
-            cmake-arch: 'x64'
             chocolatey-options: '' # '--forcex86' for 32-bit build
             use-qtwebengine: 'ON' # might need to be turned off for MinGW
             ableton-link: 'ON' # might need to be turned off for MinGW
@@ -419,6 +419,8 @@ jobs:
         run: |
           # set PATH=%Qt5_DIR%\bin;%PATH%
           export PATH=$Qt5_DIR/bin:$PATH
+          
+          cmd //c "%VCVARS_SCRIPT_PATH%"
 
           mkdir $BUILD_PATH && cd $BUILD_PATH
 
