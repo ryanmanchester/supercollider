@@ -85,60 +85,7 @@ set( QT_COLLIDER_HDRS
 )
 
 set( QT_COLLIDER_SRCS
-  ${QT_COLLIDER_DIR}/type_codec.cpp
-  ${QT_COLLIDER_DIR}/metatype.cpp
-  ${QT_COLLIDER_DIR}/debug.cpp
-  ${QT_COLLIDER_DIR}/interface.cpp
-  ${QT_COLLIDER_DIR}/factories.cpp
-  ${QT_COLLIDER_DIR}/QcApplication.cpp
-  ${QT_COLLIDER_DIR}/Common.cpp
-  ${QT_COLLIDER_DIR}/QObjectProxy.cpp
-  ${QT_COLLIDER_DIR}/QWidgetProxy.cpp
-  ${QT_COLLIDER_DIR}/QcObjectFactory.cpp
-  ${QT_COLLIDER_DIR}/QtDownload.cpp
-  ${QT_COLLIDER_DIR}/QcCallback.cpp
-  ${QT_COLLIDER_DIR}/hacks/hacks_x11.cpp
-  ${QT_COLLIDER_DIR}/primitives/primitives.cpp
-  ${QT_COLLIDER_DIR}/primitives/prim_QObject.cpp
-  ${QT_COLLIDER_DIR}/primitives/prim_QPen.cpp
-  ${QT_COLLIDER_DIR}/primitives/prim_misc.cpp
-  ${QT_COLLIDER_DIR}/primitives/prim_QWidget.cpp
-  ${QT_COLLIDER_DIR}/primitives/prim_QPalette.cpp
-  ${QT_COLLIDER_DIR}/primitives/prim_QImage.cpp
-  ${QT_COLLIDER_DIR}/widgets/BasicWidgets.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcButton.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcCheckBox.h
-  ${QT_COLLIDER_DIR}/widgets/QcTextField.h
-  ${QT_COLLIDER_DIR}/widgets/QcListWidget.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcPopUpMenu.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcTreeWidget.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcMenu.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcScrollArea.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcAbstractStepValue.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcNumberBox.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcSlider.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcSlider2D.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcRangeSlider.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcMultiSlider.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcKnob.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcTextEdit.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcScope.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcScopeShm.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcLevelIndicator.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcWebView.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcWindow.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcGraph.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcCanvas.cpp
   ${QT_COLLIDER_DIR}/widgets/soundfileview/view.cpp
-  ${QT_COLLIDER_DIR}/widgets/soundfileview/filestream.cpp
-  ${QT_COLLIDER_DIR}/widgets/soundfileview/cachestream.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcFileDialog.cpp
-  ${QT_COLLIDER_DIR}/widgets/QcPenPrinter.cpp
-  ${QT_COLLIDER_DIR}/widgets/web_page.cpp
-  ${QT_COLLIDER_DIR}/layouts/layouts.cpp
-  ${QT_COLLIDER_DIR}/layouts/stack_layout.cpp
-  ${QT_COLLIDER_DIR}/style/ProxyStyle.cpp
-  ${QT_COLLIDER_DIR}/style/style.cpp
 )
 
 if(QT_COLLIDER_LANG_CLIENT)
