@@ -21,7 +21,9 @@
 
 #pragma once
 
+#pragma message "meow3"
 #include "Common.h"
+#pragma message "meow4"
 
 #include <QObject>
 #include <QString>

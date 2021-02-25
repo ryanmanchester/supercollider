@@ -21,7 +21,9 @@
 
 #pragma once
 
+#pragma message "meow5"
 #include "debug.h"
+#pragma message "meow6"
 
 #include <QList>
 #include <QVariant>

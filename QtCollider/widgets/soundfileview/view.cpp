@@ -20,4 +20,6 @@
  ************************************************************************/
 
 #include "view.hpp"
-#include "../../QcObjectFactory.h"
+#pragma message "meow"
+#include "../../QObjectProxy.h"
+#pragma message "meow2"
