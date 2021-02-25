@@ -20,4 +20,4 @@
  ************************************************************************/
 
 #include "view.hpp"
-#include "../../QcWidgetFactory.h"
+#include "../../QcObjectFactory.h"

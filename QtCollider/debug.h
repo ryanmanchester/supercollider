@@ -19,8 +19,6 @@
  *
  ************************************************************************/
 
-#pragma once
-
 namespace QtCollider {
 int debugLevel();
 void setDebugLevel(int);
